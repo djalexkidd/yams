@@ -1,0 +1,204 @@
+[gd_scene load_steps=19 format=3 uid="uid://b3cli8g7jlye6"]
+
+[ext_resource type="Texture2D" uid="uid://yt3h73wjw0e0" path="res://assets/buttons/1.png" id="1_ehn74"]
+[ext_resource type="Texture2D" uid="uid://ddtspvc6tme47" path="res://assets/buttons/donne.png" id="1_o8lvj"]
+[ext_resource type="Texture2D" uid="uid://cqikhi4ej1e72" path="res://assets/buttons/2.png" id="2_80lwa"]
+[ext_resource type="Texture2D" uid="uid://dqpc763imh4x0" path="res://assets/buttons/3.png" id="3_yjhsh"]
+[ext_resource type="Texture2D" uid="uid://17fmnrsw0c2h" path="res://assets/buttons/4.png" id="4_qo4cy"]
+[ext_resource type="Texture2D" uid="uid://dkd38rjsj3c7w" path="res://assets/buttons/4same.png" id="5_jrle0"]
+[ext_resource type="Texture2D" uid="uid://ch4k1j42tsc1a" path="res://assets/buttons/5.png" id="6_wa7wl"]
+[ext_resource type="Texture2D" uid="uid://cd0glwc42o5qa" path="res://assets/buttons/5same.png" id="7_7dmel"]
+[ext_resource type="Texture2D" uid="uid://cjowe5h18rdcd" path="res://assets/buttons/6.png" id="8_ngncf"]
+[ext_resource type="Texture2D" uid="uid://d3cqy0c00mvlb" path="res://assets/buttons/chance.png" id="9_pqird"]
+[ext_resource type="Texture2D" uid="uid://baoabrwtmpjge" path="res://assets/buttons/different.png" id="10_eugrt"]
+[ext_resource type="Texture2D" uid="uid://o77e2vd1s22f" path="res://assets/buttons/fullhouse.png" id="11_2ewly"]
+[ext_resource type="Texture2D" uid="uid://tm8tlytr7tfq" path="res://assets/buttons/pairs.png" id="12_hlbxv"]
+[ext_resource type="Texture2D" uid="uid://cxrgab8lfefnf" path="res://assets/buttons/pause.png" id="13_20xcb"]
+[ext_resource type="Texture2D" uid="uid://2my6jy8ag0sw" path="res://assets/backgrounds/taskbar.png" id="14_qoxul"]
+[ext_resource type="Texture2D" uid="uid://cvlh24fsuving" path="res://assets/backgrounds/dicebackground.png" id="16_uvxnk"]
+
+[sub_resource type="Gradient" id="Gradient_qfab2"]
+colors = PackedColorArray(0.172549, 0.364706, 0.443137, 1, 0.172549, 0.443137, 0.541176, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yyp67"]
+gradient = SubResource("Gradient_qfab2")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 8
+
+[node name="Game" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_yyp67")
+
+[node name="DealButtons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -232.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextureButton" type="TextureButton" parent="DealButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("1_o8lvj")
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="DealButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("1_o8lvj")
+stretch_mode = 0
+
+[node name="ScoreButtons" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -230.0
+offset_right = 548.0
+offset_bottom = -8.0
+grow_vertical = 0
+columns = 4
+
+[node name="1" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_ehn74")
+stretch_mode = 0
+
+[node name="4" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("4_qo4cy")
+stretch_mode = 0
+
+[node name="Chance" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("9_pqird")
+stretch_mode = 0
+
+[node name="Pairs" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("12_hlbxv")
+stretch_mode = 0
+
+[node name="2" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("2_80lwa")
+stretch_mode = 0
+
+[node name="5" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("6_wa7wl")
+stretch_mode = 0
+
+[node name="FullHouse" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("11_2ewly")
+stretch_mode = 0
+
+[node name="AllDifferent" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("10_eugrt")
+stretch_mode = 0
+
+[node name="3" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("3_yjhsh")
+stretch_mode = 0
+
+[node name="6" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("8_ngncf")
+stretch_mode = 0
+
+[node name="4same" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("5_jrle0")
+stretch_mode = 0
+
+[node name="5same" type="TextureButton" parent="ScoreButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("7_7dmel")
+stretch_mode = 0
+
+[node name="TaskBar" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 128.0
+grow_horizontal = 2
+texture = ExtResource("14_qoxul")
+
+[node name="TextureButton" type="TextureButton" parent="TaskBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 24.0
+offset_right = -32.0
+offset_bottom = 88.0
+grow_horizontal = 0
+texture_normal = ExtResource("13_20xcb")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = -136.0
+offset_right = 344.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_uvxnk")
