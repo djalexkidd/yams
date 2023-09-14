@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://b3cli8g7jlye6"]
+[gd_scene load_steps=27 format=3 uid="uid://b3cli8g7jlye6"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_3svv7"]
 [ext_resource type="Texture2D" uid="uid://yt3h73wjw0e0" path="res://assets/buttons/1.png" id="1_ehn74"]
 [ext_resource type="Texture2D" uid="uid://ddtspvc6tme47" path="res://assets/buttons/donne.png" id="1_o8lvj"]
 [ext_resource type="Texture2D" uid="uid://cqikhi4ej1e72" path="res://assets/buttons/2.png" id="2_80lwa"]
+[ext_resource type="Script" path="res://scripts/deal.gd" id="2_p01pa"]
 [ext_resource type="Texture2D" uid="uid://dqpc763imh4x0" path="res://assets/buttons/3.png" id="3_yjhsh"]
 [ext_resource type="Texture2D" uid="uid://17fmnrsw0c2h" path="res://assets/buttons/4.png" id="4_qo4cy"]
 [ext_resource type="Texture2D" uid="uid://dkd38rjsj3c7w" path="res://assets/buttons/4same.png" id="5_jrle0"]
@@ -66,14 +67,15 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
+script = ExtResource("2_p01pa")
 
-[node name="TextureButton" type="TextureButton" parent="DealButtons"]
+[node name="DealButton1" type="TextureButton" parent="DealButtons"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = ExtResource("1_o8lvj")
 stretch_mode = 0
 
-[node name="TextureButton2" type="TextureButton" parent="DealButtons"]
+[node name="DealButton2" type="TextureButton" parent="DealButtons"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = ExtResource("1_o8lvj")
@@ -91,14 +93,14 @@ offset_bottom = -8.0
 grow_vertical = 0
 columns = 4
 
-[node name="1" type="TextureButton" parent="ScoreButtons"]
+[node name="One" type="TextureButton" parent="ScoreButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource("1_ehn74")
 stretch_mode = 0
 
-[node name="4" type="TextureButton" parent="ScoreButtons"]
+[node name="Four" type="TextureButton" parent="ScoreButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -119,14 +121,14 @@ size_flags_vertical = 3
 texture_normal = ExtResource("12_hlbxv")
 stretch_mode = 0
 
-[node name="2" type="TextureButton" parent="ScoreButtons"]
+[node name="Two" type="TextureButton" parent="ScoreButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource("2_80lwa")
 stretch_mode = 0
 
-[node name="5" type="TextureButton" parent="ScoreButtons"]
+[node name="Five" type="TextureButton" parent="ScoreButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -147,28 +149,28 @@ size_flags_vertical = 3
 texture_normal = ExtResource("10_eugrt")
 stretch_mode = 0
 
-[node name="3" type="TextureButton" parent="ScoreButtons"]
+[node name="Three" type="TextureButton" parent="ScoreButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource("3_yjhsh")
 stretch_mode = 0
 
-[node name="6" type="TextureButton" parent="ScoreButtons"]
+[node name="Six" type="TextureButton" parent="ScoreButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource("8_ngncf")
 stretch_mode = 0
 
-[node name="4same" type="TextureButton" parent="ScoreButtons"]
+[node name="FourSame" type="TextureButton" parent="ScoreButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource("5_jrle0")
 stretch_mode = 0
 
-[node name="5same" type="TextureButton" parent="ScoreButtons"]
+[node name="FiveSame" type="TextureButton" parent="ScoreButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -303,6 +305,9 @@ stream = ExtResource("22_m82gr")
 [node name="UnpauseSound" type="AudioStreamPlayer" parent="PausePanel"]
 stream = ExtResource("23_5euy7")
 
+[connection signal="deal" from="DealButtons" to="." method="_on_deal_buttons_deal"]
+[connection signal="pressed" from="DealButtons/DealButton1" to="DealButtons" method="_on_deal_button_1_pressed"]
+[connection signal="pressed" from="DealButtons/DealButton2" to="DealButtons" method="_on_deal_button_2_pressed"]
 [connection signal="pressed" from="TaskBar/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PausePanel/Pause/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="PausePanel/Pause/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
