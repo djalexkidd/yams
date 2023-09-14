@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b3cli8g7jlye6"]
+[gd_scene load_steps=32 format=3 uid="uid://b3cli8g7jlye6"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_3svv7"]
 [ext_resource type="Texture2D" uid="uid://yt3h73wjw0e0" path="res://assets/buttons/1.png" id="1_ehn74"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cqikhi4ej1e72" path="res://assets/buttons/2.png" id="2_80lwa"]
 [ext_resource type="Script" path="res://scripts/deal.gd" id="2_p01pa"]
 [ext_resource type="Texture2D" uid="uid://dqpc763imh4x0" path="res://assets/buttons/3.png" id="3_yjhsh"]
+[ext_resource type="Script" path="res://scripts/scorebuttons.gd" id="4_7p6qs"]
+[ext_resource type="Texture2D" uid="uid://dkdmwg4qnb0hf" path="res://assets/buttons/donne_pressed.png" id="4_gjxsv"]
 [ext_resource type="Texture2D" uid="uid://17fmnrsw0c2h" path="res://assets/buttons/4.png" id="4_qo4cy"]
 [ext_resource type="Texture2D" uid="uid://dkd38rjsj3c7w" path="res://assets/buttons/4same.png" id="5_jrle0"]
 [ext_resource type="Texture2D" uid="uid://ch4k1j42tsc1a" path="res://assets/buttons/5.png" id="6_wa7wl"]
@@ -19,8 +21,11 @@
 [ext_resource type="Texture2D" uid="uid://2my6jy8ag0sw" path="res://assets/backgrounds/taskbar.png" id="14_qoxul"]
 [ext_resource type="Texture2D" uid="uid://cvlh24fsuving" path="res://assets/backgrounds/dicebackground.png" id="16_uvxnk"]
 [ext_resource type="PackedScene" uid="uid://dugvx6vlrxnb0" path="res://scenes/dice.tscn" id="18_33sc2"]
+[ext_resource type="AudioStream" uid="uid://bbinb51s86c08" path="res://assets/sounds/error.ogg" id="18_ga1ha"]
 [ext_resource type="Texture2D" uid="uid://bub043kyrcvw1" path="res://assets/buttons/continue.png" id="19_j5gng"]
+[ext_resource type="AudioStream" uid="uid://bpdbg1aj5artm" path="res://assets/sounds/six.ogg" id="19_mhtml"]
 [ext_resource type="Texture2D" uid="uid://dxysnf02s8kni" path="res://assets/buttons/restart.png" id="20_lusi5"]
+[ext_resource type="AudioStream" uid="uid://u0pbwcmiewjh" path="res://assets/sounds/chance.ogg" id="20_lwi0w"]
 [ext_resource type="Texture2D" uid="uid://dpq5acm025uto" path="res://assets/buttons/exit.png" id="21_coixj"]
 [ext_resource type="AudioStream" uid="uid://cmlpmq5u3sesb" path="res://assets/sounds/pause.ogg" id="22_m82gr"]
 [ext_resource type="AudioStream" uid="uid://ckfduqdodj0nv" path="res://assets/sounds/unpause.ogg" id="23_5euy7"]
@@ -73,12 +78,14 @@ script = ExtResource("2_p01pa")
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = ExtResource("1_o8lvj")
+texture_pressed = ExtResource("4_gjxsv")
 stretch_mode = 0
 
 [node name="DealButton2" type="TextureButton" parent="DealButtons"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = ExtResource("1_o8lvj")
+texture_pressed = ExtResource("4_gjxsv")
 stretch_mode = 0
 
 [node name="ScoreButtons" type="GridContainer" parent="."]
@@ -92,6 +99,7 @@ offset_right = 548.0
 offset_bottom = -8.0
 grow_vertical = 0
 columns = 4
+script = ExtResource("4_7p6qs")
 
 [node name="One" type="TextureButton" parent="ScoreButtons"]
 layout_mode = 2
@@ -176,6 +184,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource("7_7dmel")
 stretch_mode = 0
+
+[node name="OneSound" type="AudioStreamPlayer" parent="ScoreButtons"]
+stream = ExtResource("22_m82gr")
+
+[node name="SixSound" type="AudioStreamPlayer" parent="ScoreButtons"]
+stream = ExtResource("19_mhtml")
+
+[node name="ChanceSound" type="AudioStreamPlayer" parent="ScoreButtons"]
+stream = ExtResource("20_lwi0w")
+
+[node name="ErrorSound" type="AudioStreamPlayer" parent="ScoreButtons"]
+stream = ExtResource("18_ga1ha")
 
 [node name="TaskBar" type="TextureRect" parent="."]
 layout_mode = 1
@@ -308,6 +328,17 @@ stream = ExtResource("23_5euy7")
 [connection signal="deal" from="DealButtons" to="." method="_on_deal_buttons_deal"]
 [connection signal="pressed" from="DealButtons/DealButton1" to="DealButtons" method="_on_deal_button_1_pressed"]
 [connection signal="pressed" from="DealButtons/DealButton2" to="DealButtons" method="_on_deal_button_2_pressed"]
+[connection signal="next_turn" from="ScoreButtons" to="." method="_on_score_buttons_next_turn"]
+[connection signal="pressed" from="ScoreButtons/One" to="ScoreButtons" method="_on_one_pressed"]
+[connection signal="pressed" from="ScoreButtons/Four" to="ScoreButtons" method="_on_four_pressed"]
+[connection signal="pressed" from="ScoreButtons/Pairs" to="ScoreButtons" method="_on_pairs_pressed"]
+[connection signal="pressed" from="ScoreButtons/Two" to="ScoreButtons" method="_on_two_pressed"]
+[connection signal="pressed" from="ScoreButtons/Five" to="ScoreButtons" method="_on_five_pressed"]
+[connection signal="pressed" from="ScoreButtons/AllDifferent" to="ScoreButtons" method="_on_all_different_pressed"]
+[connection signal="pressed" from="ScoreButtons/Three" to="ScoreButtons" method="_on_three_pressed"]
+[connection signal="pressed" from="ScoreButtons/Six" to="ScoreButtons" method="_on_six_pressed"]
+[connection signal="pressed" from="ScoreButtons/FourSame" to="ScoreButtons" method="_on_four_same_pressed"]
+[connection signal="pressed" from="ScoreButtons/FiveSame" to="ScoreButtons" method="_on_five_same_pressed"]
 [connection signal="pressed" from="TaskBar/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PausePanel/Pause/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="PausePanel/Pause/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

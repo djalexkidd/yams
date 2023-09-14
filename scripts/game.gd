@@ -1,6 +1,7 @@
 extends Control
 
 var dice = [0, 0, 0, 0, 0]
+var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,55 +22,65 @@ func reroll():
 	check_options()
 
 func check_options():
-	if areAllNumbersDifferent(dice) and !$ScoreButtons/AllDifferent.disabled:
-		$ScoreButtons/AllDifferent.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/AllDifferent.modulate = Color(1,1,1)
+	if !$ScoreButtons/AllDifferent.disabled:
+		if areAllNumbersDifferent(dice):
+			$ScoreButtons/AllDifferent.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/AllDifferent.modulate = Color(1,1,1)
 	
-	if hasAtLeastThreeOnes(dice) and !$ScoreButtons/One.disabled:
-		$ScoreButtons/One.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/One.modulate = Color(1,1,1)
+	if !$ScoreButtons/One.disabled:
+		if hasAtLeastThreeOnes(dice):
+			$ScoreButtons/One.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/One.modulate = Color(1,1,1)
 	
-	if hasAtLeastThreeTwos(dice) and !$ScoreButtons/Two.disabled:
-		$ScoreButtons/Two.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/Two.modulate = Color(1,1,1)
+	if !$ScoreButtons/Two.disabled:
+		if hasAtLeastThreeTwos(dice):
+			$ScoreButtons/Two.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/Two.modulate = Color(1,1,1)
 	
-	if hasAtLeastThreeThrees(dice) and !$ScoreButtons/Three.disabled:
-		$ScoreButtons/Three.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/Three.modulate = Color(1,1,1)
-		
-	if hasAtLeastThreeFours(dice) and !$ScoreButtons/Four.disabled:
-		$ScoreButtons/Four.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/Four.modulate = Color(1,1,1)
+	if !$ScoreButtons/Three.disabled:
+		if hasAtLeastThreeThrees(dice):
+			$ScoreButtons/Three.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/Three.modulate = Color(1,1,1)
 	
-	if hasAtLeastThreeFives(dice) and !$ScoreButtons/Five.disabled:
-		$ScoreButtons/Five.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/Five.modulate = Color(1,1,1)
+	if !$ScoreButtons/Four.disabled:
+		if hasAtLeastThreeFours(dice):
+			$ScoreButtons/Four.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/Four.modulate = Color(1,1,1)
 	
-	if hasAtLeastThreeSix(dice) and !$ScoreButtons/Six.disabled:
-		$ScoreButtons/Six.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/Six.modulate = Color(1,1,1)
+	if !$ScoreButtons/Five.disabled:
+		if hasAtLeastThreeFives(dice):
+			$ScoreButtons/Five.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/Five.modulate = Color(1,1,1)
 	
-	if hasAnyNumberAtLeastFourTimes(dice) and !$ScoreButtons/FourSame.disabled:
-		$ScoreButtons/FourSame.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/FourSame.modulate = Color(1,1,1)
+	if !$ScoreButtons/Six.disabled:
+		if hasAtLeastThreeSix(dice):
+			$ScoreButtons/Six.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/Six.modulate = Color(1,1,1)
 	
-	if hasAnyNumberAtLeastFiveTimes(dice) and !$ScoreButtons/FiveSame.disabled:
-		$ScoreButtons/FiveSame.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/FiveSame.modulate = Color(1,1,1)
+	if !$ScoreButtons/FourSame.disabled:
+		if hasAnyNumberAtLeastFourTimes(dice):
+			$ScoreButtons/FourSame.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/FourSame.modulate = Color(1,1,1)
 	
-	if hasAnyPair(dice) and !$ScoreButtons/Pairs.disabled:
-		$ScoreButtons/Pairs.modulate = Color(0,1,0)
-	else:
-		$ScoreButtons/Pairs.modulate = Color(1,1,1)
+	if !$ScoreButtons/FiveSame.disabled:
+		if hasAnyNumberAtLeastFiveTimes(dice):
+			$ScoreButtons/FiveSame.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/FiveSame.modulate = Color(1,1,1)
+	
+	if !$ScoreButtons/Pairs.disabled:
+		if hasAnyPair(dice):
+			$ScoreButtons/Pairs.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/Pairs.modulate = Color(1,1,1)
 
 func _on_pause_button_pressed():
 	$PausePanel.show()
@@ -222,3 +233,12 @@ func hasAnyPair(dice):
 			return true
 	
 	return false
+
+func _on_score_buttons_next_turn(score_add):
+	score += score_add
+	print(score)
+	$DealButtons/DealButton1.show()
+	$DealButtons/DealButton1.disabled = false
+	$DealButtons/DealButton2.show()
+	$DealButtons/DealButton2.disabled = false
+	_ready()
