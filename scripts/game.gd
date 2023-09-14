@@ -10,7 +10,7 @@ func reroll():
 	randomize()
 	for i in 5:
 		dice[i] = randi()%6+1
-		print(dice[i])
+		get_node("Dices/HBoxContainer/Dice" + str(i+1)).change_number(dice[i])
 
 func _on_pause_button_pressed():
 	$PausePanel.show()
