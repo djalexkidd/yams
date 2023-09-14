@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dugvx6vlrxnb0"]
+
+[ext_resource type="Texture2D" uid="uid://yrxoe3qparpt" path="res://assets/dice/1.png" id="1_4cdc1"]
+[ext_resource type="Texture2D" uid="uid://b7oqogprpfsw0" path="res://assets/dice/selected.png" id="2_g27km"]
+[ext_resource type="Script" path="res://scripts/dice.gd" id="3_r5e82"]
+[ext_resource type="AudioStream" uid="uid://5hybidok4vy8" path="res://assets/sounds/unhold.ogg" id="4_72ci8"]
+[ext_resource type="AudioStream" uid="uid://cqtssgedenequ" path="res://assets/sounds/hold.ogg" id="5_l4dyo"]
+
+[node name="Dice" type="TextureButton"]
+offset_right = 54.0
+offset_bottom = 54.0
+toggle_mode = true
+texture_normal = ExtResource("1_4cdc1")
+texture_pressed = ExtResource("2_g27km")
+stretch_mode = 0
+script = ExtResource("3_r5e82")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_72ci8")
+
+[node name="Deselect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_l4dyo")
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

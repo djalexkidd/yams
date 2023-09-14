@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3cli8g7jlye6"]
+[gd_scene load_steps=26 format=3 uid="uid://b3cli8g7jlye6"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_3svv7"]
 [ext_resource type="Texture2D" uid="uid://yt3h73wjw0e0" path="res://assets/buttons/1.png" id="1_ehn74"]
 [ext_resource type="Texture2D" uid="uid://ddtspvc6tme47" path="res://assets/buttons/donne.png" id="1_o8lvj"]
 [ext_resource type="Texture2D" uid="uid://cqikhi4ej1e72" path="res://assets/buttons/2.png" id="2_80lwa"]
@@ -16,6 +17,12 @@
 [ext_resource type="Texture2D" uid="uid://cxrgab8lfefnf" path="res://assets/buttons/pause.png" id="13_20xcb"]
 [ext_resource type="Texture2D" uid="uid://2my6jy8ag0sw" path="res://assets/backgrounds/taskbar.png" id="14_qoxul"]
 [ext_resource type="Texture2D" uid="uid://cvlh24fsuving" path="res://assets/backgrounds/dicebackground.png" id="16_uvxnk"]
+[ext_resource type="PackedScene" uid="uid://dugvx6vlrxnb0" path="res://scenes/dice.tscn" id="18_33sc2"]
+[ext_resource type="Texture2D" uid="uid://bub043kyrcvw1" path="res://assets/buttons/continue.png" id="19_j5gng"]
+[ext_resource type="Texture2D" uid="uid://dxysnf02s8kni" path="res://assets/buttons/restart.png" id="20_lusi5"]
+[ext_resource type="Texture2D" uid="uid://dpq5acm025uto" path="res://assets/buttons/exit.png" id="21_coixj"]
+[ext_resource type="AudioStream" uid="uid://cmlpmq5u3sesb" path="res://assets/sounds/pause.ogg" id="22_m82gr"]
+[ext_resource type="AudioStream" uid="uid://ckfduqdodj0nv" path="res://assets/sounds/unpause.ogg" id="23_5euy7"]
 
 [sub_resource type="Gradient" id="Gradient_qfab2"]
 colors = PackedColorArray(0.172549, 0.364706, 0.443137, 1, 0.172549, 0.443137, 0.541176, 1)
@@ -35,6 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_3svv7")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -175,7 +183,7 @@ offset_bottom = 128.0
 grow_horizontal = 2
 texture = ExtResource("14_qoxul")
 
-[node name="TextureButton" type="TextureButton" parent="TaskBar"]
+[node name="PauseButton" type="TextureButton" parent="TaskBar"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -188,7 +196,7 @@ grow_horizontal = 0
 texture_normal = ExtResource("13_20xcb")
 stretch_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Dices" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -202,3 +210,98 @@ offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("16_uvxnk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Dices"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -308.0
+offset_top = -56.0
+offset_right = 308.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Dice1" parent="Dices/HBoxContainer" instance=ExtResource("18_33sc2")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Dice2" parent="Dices/HBoxContainer" instance=ExtResource("18_33sc2")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Dice3" parent="Dices/HBoxContainer" instance=ExtResource("18_33sc2")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Dice4" parent="Dices/HBoxContainer" instance=ExtResource("18_33sc2")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Dice5" parent="Dices/HBoxContainer" instance=ExtResource("18_33sc2")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PausePanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pause" type="ColorRect" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.419608)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PausePanel/Pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -176.0
+offset_right = 132.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="ContinueButton" type="TextureButton" parent="PausePanel/Pause/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("19_j5gng")
+stretch_mode = 0
+
+[node name="RestartButton" type="TextureButton" parent="PausePanel/Pause/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("20_lusi5")
+stretch_mode = 0
+
+[node name="ExitButton" type="TextureButton" parent="PausePanel/Pause/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("21_coixj")
+stretch_mode = 0
+
+[node name="PauseSound" type="AudioStreamPlayer" parent="PausePanel"]
+stream = ExtResource("22_m82gr")
+
+[node name="UnpauseSound" type="AudioStreamPlayer" parent="PausePanel"]
+stream = ExtResource("23_5euy7")
+
+[connection signal="pressed" from="TaskBar/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="PausePanel/Pause/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="PausePanel/Pause/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PausePanel/Pause/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
