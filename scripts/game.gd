@@ -81,6 +81,15 @@ func check_options():
 			$ScoreButtons/Pairs.modulate = Color(0,1,0)
 		else:
 			$ScoreButtons/Pairs.modulate = Color(1,1,1)
+	
+	if !$ScoreButtons/FullHouse.disabled:
+		if hasFullHouse(dice):
+			$ScoreButtons/FullHouse.modulate = Color(0,1,0)
+		else:
+			$ScoreButtons/FullHouse.modulate = Color(1,1,1)
+	
+	if !$ScoreButtons/Chance.disabled:
+		$ScoreButtons/Chance.modulate = Color(0,1,0)
 
 func _on_pause_button_pressed():
 	$PausePanel.show()
@@ -234,8 +243,59 @@ func hasAnyPair(dice):
 	
 	return false
 
+func hasFullHouse(dice):
+	var count = {}
+	
+	# Compter le nombre de chaque valeur de dé dans le tableau
+	for die_value in dice:
+		if die_value not in count:
+			count[die_value] = 1
+		else:
+			count[die_value] += 1
+	
+	var has_three_of_a_kind = false
+	var has_two_of_a_kind = false
+	
+	for key in count:
+		if count[key] >= 3:
+			has_three_of_a_kind = true
+		
+		if count[key] >= 2:
+			has_two_of_a_kind = true
+	
+	# Retourner vrai si nous avons à la fois trois dés identiques et deux dés identiques
+	return has_three_of_a_kind and has_two_of_a_kind
+
+func allOptions(dice):
+	print(dice[0] + dice[1] + dice[2] + dice[3] + dice[4])
+	return dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
+
 func _on_score_buttons_next_turn(score_add):
-	score += score_add
+	if hasAnyNumberAtLeastFiveTimes(dice):
+		score += 50
+	elif hasAnyNumberAtLeastFourTimes(dice):
+		score += 30
+	else:
+		match score_add:
+			0: # Toutes options
+				score += allOptions(dice)
+			1: # 1
+				score += 3
+			2: # 2
+				score += 6
+			3: # 3
+				score += 9
+			4: # 4
+				score += 12
+			5: # 5
+				score += 15
+			6: # 6
+				score += 18
+			7: # 4 pareills et tous différents
+				score += 30
+			9: # 2+3 pareills
+				score += 25
+	
 	print(score)
 	$DealButtons/DealButton1.show()
 	$DealButtons/DealButton1.disabled = false
