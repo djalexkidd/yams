@@ -85,7 +85,7 @@ func _on_all_different_pressed():
 		$AllDifferent.disabled = true
 		$AllDifferent.modulate = Color(0.30,0.30,0.30)
 		$OneSound.play()
-		next_turn.emit(7)
+		next_turn.emit(8)
 	else:
 		$ErrorSound.play()
 
@@ -104,7 +104,7 @@ func _on_full_house_pressed():
 		$FullHouse.disabled = true
 		$FullHouse.modulate = Color(0.30,0.30,0.30)
 		$OneSound.play()
-		next_turn.emit(9)
+		next_turn.emit(8)
 	else:
 		$ErrorSound.play()
 

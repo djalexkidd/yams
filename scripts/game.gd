@@ -91,6 +91,34 @@ func check_options():
 	
 	if !$ScoreButtons/Chance.disabled:
 		$ScoreButtons/Chance.modulate = Color(0,1,0)
+	
+	var allScoreButtonsActive = true
+	var allScoreButtonsInactive = true
+	
+	for button in $ScoreButtons.get_children():
+		if button is TextureButton:
+			if button.modulate == Color(0,1,0):
+				allScoreButtonsActive = false
+				break
+	
+	for button in $ScoreButtons.get_children():
+		if button is TextureButton:
+			if !button.disabled:
+				allScoreButtonsInactive = false
+				break
+	
+	# Game Over
+	if $DealButtons/DealButton1.disabled and $DealButtons/DealButton2.disabled and allScoreButtonsActive:
+		print("pipi")
+		if score >= 175:
+			next_level()
+		else:
+			game_over()
+	
+	# Level passed
+	if allScoreButtonsInactive:
+		print("caca")
+		next_level()
 
 func _on_pause_button_pressed():
 	$PausePanel.show()
@@ -259,10 +287,10 @@ func hasFullHouse(dice):
 	var has_two_of_a_kind = false
 	
 	for key in count:
-		if count[key] >= 3:
+		if count[key] == 3:
 			has_three_of_a_kind = true
 		
-		if count[key] >= 2:
+		if count[key] == 2:
 			has_two_of_a_kind = true
 	
 	# Retourner vrai si nous avons à la fois trois dés identiques et deux dés identiques
@@ -293,9 +321,9 @@ func _on_score_buttons_next_turn(score_add):
 				score += 15
 			6: # 6
 				score += 18
-			7: # 4 pareills et tous différents
+			7: # 4 pareills
 				score += 30
-			9: # 2+3 pareills
+			8: # 2+3 pareills et tous différents
 				score += 25
 	$TaskBar/ScoreContainer/ScoreValueLabel.text = str(score)
 	
@@ -304,3 +332,9 @@ func _on_score_buttons_next_turn(score_add):
 	$DealButtons/DealButton2.show()
 	$DealButtons/DealButton2.disabled = false
 	_ready()
+
+func next_level():
+	print("OH WOW GG TU VEUX UNE MÉDAY ?")
+
+func game_over():
+	print("bouh t nul >:(")
