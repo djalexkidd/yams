@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b3cli8g7jlye6"]
+[gd_scene load_steps=34 format=3 uid="uid://b3cli8g7jlye6"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_3svv7"]
 [ext_resource type="Texture2D" uid="uid://yt3h73wjw0e0" path="res://assets/buttons/1.png" id="1_ehn74"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://dpq5acm025uto" path="res://assets/buttons/exit.png" id="21_coixj"]
 [ext_resource type="AudioStream" uid="uid://cmlpmq5u3sesb" path="res://assets/sounds/pause.ogg" id="22_m82gr"]
 [ext_resource type="AudioStream" uid="uid://ckfduqdodj0nv" path="res://assets/sounds/unpause.ogg" id="23_5euy7"]
+[ext_resource type="FontFile" uid="uid://dhc1te1njn76y" path="res://assets/fonts/digitalix.ttf" id="25_qhkys"]
 
 [sub_resource type="Gradient" id="Gradient_qfab2"]
 colors = PackedColorArray(0.172549, 0.364706, 0.443137, 1, 0.172549, 0.443137, 0.541176, 1)
@@ -220,6 +221,46 @@ offset_bottom = 88.0
 grow_horizontal = 0
 texture_normal = ExtResource("13_20xcb")
 stretch_mode = 0
+
+[node name="ScoreContainer" type="HBoxContainer" parent="TaskBar"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 232.0
+offset_bottom = 56.0
+
+[node name="ScoreLabel" type="Label" parent="TaskBar/ScoreContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("25_qhkys")
+theme_override_font_sizes/font_size = 26
+text = "SCORE:"
+
+[node name="ScoreValueLabel" type="Label" parent="TaskBar/ScoreContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("25_qhkys")
+theme_override_font_sizes/font_size = 26
+text = "0"
+
+[node name="HighScoreContainer" type="HBoxContainer" parent="TaskBar"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 96.0
+
+[node name="HighScoreLabel" type="Label" parent="TaskBar/HighScoreContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("25_qhkys")
+theme_override_font_sizes/font_size = 26
+text = "HIGH SCORE:"
+
+[node name="HighScoreValueLabel" type="Label" parent="TaskBar/HighScoreContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("25_qhkys")
+theme_override_font_sizes/font_size = 26
+text = "0"
 
 [node name="Dices" type="TextureRect" parent="."]
 layout_mode = 1

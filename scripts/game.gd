@@ -21,6 +21,7 @@ func reroll():
 			get_node("Dices/HBoxContainer/Dice" + str(i+1)).button_pressed = false
 	check_options()
 
+# Vérifier si le joueur peut jouer
 func check_options():
 	if !$ScoreButtons/AllDifferent.disabled:
 		if areAllNumbersDifferent(dice):
@@ -243,6 +244,7 @@ func hasAnyPair(dice):
 	
 	return false
 
+# Si 2 + 3 pareills ⚁⚁⚂⚂⚂
 func hasFullHouse(dice):
 	var count = {}
 	
@@ -266,8 +268,8 @@ func hasFullHouse(dice):
 	# Retourner vrai si nous avons à la fois trois dés identiques et deux dés identiques
 	return has_three_of_a_kind and has_two_of_a_kind
 
+# Additionner tous les nombres
 func allOptions(dice):
-	print(dice[0] + dice[1] + dice[2] + dice[3] + dice[4])
 	return dice[0] + dice[1] + dice[2] + dice[3] + dice[4]
 
 func _on_score_buttons_next_turn(score_add):
@@ -295,8 +297,8 @@ func _on_score_buttons_next_turn(score_add):
 				score += 30
 			9: # 2+3 pareills
 				score += 25
+	$TaskBar/ScoreContainer/ScoreValueLabel.text = str(score)
 	
-	print(score)
 	$DealButtons/DealButton1.show()
 	$DealButtons/DealButton1.disabled = false
 	$DealButtons/DealButton2.show()
