@@ -2,6 +2,7 @@ extends Control
 
 var dice = [0, 0, 0, 0, 0]
 var score = 0
+var bonus = 175
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -110,7 +111,7 @@ func check_options():
 	# Game Over
 	if $DealButtons/DealButton1.disabled and $DealButtons/DealButton2.disabled and allScoreButtonsActive:
 		print("pipi")
-		if score >= 175:
+		if score >= bonus:
 			next_level()
 		else:
 			game_over()
@@ -327,14 +328,20 @@ func _on_score_buttons_next_turn(score_add):
 				score += 25
 	$TaskBar/ScoreContainer/ScoreValueLabel.text = str(score)
 	
-	$DealButtons/DealButton1.show()
 	$DealButtons/DealButton1.disabled = false
-	$DealButtons/DealButton2.show()
 	$DealButtons/DealButton2.disabled = false
 	_ready()
 
 func next_level():
-	print("OH WOW GG TU VEUX UNE MÉDAY ?")
+	bonus += score + bonus + 25
+	for button in $ScoreButtons.get_children():
+		if button is TextureButton:
+			button.modulate = Color(1,1,1)
+			button.disabled = false
+	
+	$DealButtons/DealButton1.disabled = false
+	$DealButtons/DealButton2.disabled = false
+	_ready()
 
 func game_over():
 	print("bouh t nul >:(")

@@ -112,7 +112,7 @@ func _on_chance_pressed():
 	if $Chance.modulate == Color(0,1,0):
 		$Chance.disabled = true
 		$Chance.modulate = Color(0.30,0.30,0.30)
-		$OneSound.play()
+		$ChanceSound.play()
 		next_turn.emit(0)
 	else:
 		$ErrorSound.play()
