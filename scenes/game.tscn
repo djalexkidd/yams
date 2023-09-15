@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b3cli8g7jlye6"]
+[gd_scene load_steps=33 format=3 uid="uid://b3cli8g7jlye6"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_3svv7"]
 [ext_resource type="Texture2D" uid="uid://yt3h73wjw0e0" path="res://assets/buttons/1.png" id="1_ehn74"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dkdmwg4qnb0hf" path="res://assets/buttons/donne_pressed.png" id="4_gjxsv"]
 [ext_resource type="Texture2D" uid="uid://17fmnrsw0c2h" path="res://assets/buttons/4.png" id="4_qo4cy"]
 [ext_resource type="Texture2D" uid="uid://dkd38rjsj3c7w" path="res://assets/buttons/4same.png" id="5_jrle0"]
+[ext_resource type="Texture2D" uid="uid://dce73fmnablp" path="res://assets/buttons/donne_disabled.png" id="5_kv8g7"]
 [ext_resource type="Texture2D" uid="uid://ch4k1j42tsc1a" path="res://assets/buttons/5.png" id="6_wa7wl"]
 [ext_resource type="Texture2D" uid="uid://cd0glwc42o5qa" path="res://assets/buttons/5same.png" id="7_7dmel"]
 [ext_resource type="Texture2D" uid="uid://cjowe5h18rdcd" path="res://assets/buttons/6.png" id="8_ngncf"]
@@ -79,6 +80,7 @@ layout_mode = 2
 size_flags_vertical = 3
 texture_normal = ExtResource("1_o8lvj")
 texture_pressed = ExtResource("4_gjxsv")
+texture_disabled = ExtResource("5_kv8g7")
 stretch_mode = 0
 
 [node name="DealButton2" type="TextureButton" parent="DealButtons"]
@@ -86,6 +88,7 @@ layout_mode = 2
 size_flags_vertical = 3
 texture_normal = ExtResource("1_o8lvj")
 texture_pressed = ExtResource("4_gjxsv")
+texture_disabled = ExtResource("5_kv8g7")
 stretch_mode = 0
 
 [node name="ScoreButtons" type="GridContainer" parent="."]
