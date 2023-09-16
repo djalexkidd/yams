@@ -2,5 +2,4 @@
 .godot/
 # My ignores
 build/
-*.import
 export_presets.cfg
