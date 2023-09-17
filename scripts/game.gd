@@ -7,6 +7,7 @@ const score_objective = 175
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$TaskBar/HighScoreContainer/HighScoreValueLabel.text = str(Global.high_score)
 	randomize()
 	for i in 5:
 		if get_node("Dices/HBoxContainer/Dice" + str(i+1)):
@@ -111,16 +112,21 @@ func check_options():
 	
 	# Game Over
 	if $DealButtons/DealButton1.disabled and $DealButtons/DealButton2.disabled and allScoreButtonsActive:
-		print("pipi")
-		if score >= score_objective:
-			next_level()
-		else:
-			game_over()
+		$OutOfMovePanel.show()
+		$OutOfMovePanel/OutOfMoveSound.play()
 	
 	# Level passed
 	if allScoreButtonsInactive:
-		print("caca")
+		score_total += score
 		next_level()
+
+func _on_out_of_move_sound_finished():
+	score_total += score
+	if score >= score_objective:
+		$OutOfMovePanel.hide()
+		next_level()
+	else:
+		game_over()
 
 func _on_pause_button_pressed():
 	$PausePanel.show()
@@ -334,7 +340,6 @@ func _on_score_buttons_next_turn(score_add):
 	_ready()
 
 func next_level():
-	score_total += score
 	score = 0
 	for button in $ScoreButtons.get_children():
 		if button is TextureButton:
@@ -346,4 +351,9 @@ func next_level():
 	_ready()
 
 func game_over():
-	print("bouh t nul >:(")
+	Global.last_score = score_total
+	if score_total > Global.high_score:
+		print("saucisse")
+		Global.high_score = score_total
+		Global.save_highscore()
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")

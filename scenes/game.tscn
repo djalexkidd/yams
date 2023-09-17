@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b3cli8g7jlye6"]
+[gd_scene load_steps=35 format=3 uid="uid://b3cli8g7jlye6"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_3svv7"]
 [ext_resource type="Texture2D" uid="uid://yt3h73wjw0e0" path="res://assets/buttons/1.png" id="1_ehn74"]
@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://cmlpmq5u3sesb" path="res://assets/sounds/pause.ogg" id="22_m82gr"]
 [ext_resource type="AudioStream" uid="uid://ckfduqdodj0nv" path="res://assets/sounds/unpause.ogg" id="23_5euy7"]
 [ext_resource type="FontFile" uid="uid://dhc1te1njn76y" path="res://assets/fonts/digitalix.ttf" id="25_qhkys"]
+[ext_resource type="AudioStream" uid="uid://ps6el42wd8ko" path="res://assets/sounds/gameover.ogg" id="32_e6bsp"]
 
 [sub_resource type="Gradient" id="Gradient_qfab2"]
 colors = PackedColorArray(0.172549, 0.364706, 0.443137, 1, 0.172549, 0.443137, 0.541176, 1)
@@ -369,6 +370,44 @@ stream = ExtResource("22_m82gr")
 [node name="UnpauseSound" type="AudioStreamPlayer" parent="PausePanel"]
 stream = ExtResource("23_5euy7")
 
+[node name="OutOfMovePanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OutOfMove" type="ColorRect" parent="OutOfMovePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.419608)
+
+[node name="OutOfMoveLabel" type="Label" parent="OutOfMovePanel/OutOfMove"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = -208.5
+offset_right = 261.0
+offset_bottom = -143.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("25_qhkys")
+theme_override_font_sizes/font_size = 61
+text = "C'EST FINI !"
+
+[node name="OutOfMoveSound" type="AudioStreamPlayer" parent="OutOfMovePanel"]
+stream = ExtResource("32_e6bsp")
+
 [connection signal="deal" from="DealButtons" to="." method="_on_deal_buttons_deal"]
 [connection signal="pressed" from="DealButtons/DealButton1" to="DealButtons" method="_on_deal_button_1_pressed"]
 [connection signal="pressed" from="DealButtons/DealButton2" to="DealButtons" method="_on_deal_button_2_pressed"]
@@ -389,3 +428,4 @@ stream = ExtResource("23_5euy7")
 [connection signal="pressed" from="PausePanel/Pause/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="PausePanel/Pause/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="PausePanel/Pause/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="finished" from="OutOfMovePanel/OutOfMoveSound" to="." method="_on_out_of_move_sound_finished"]
