@@ -353,7 +353,6 @@ func next_level():
 func game_over():
 	Global.last_score = score_total
 	if score_total > Global.high_score:
-		print("saucisse")
 		Global.high_score = score_total
 		Global.save_highscore()
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
