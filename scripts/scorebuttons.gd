@@ -75,7 +75,7 @@ func _on_five_same_pressed():
 	if $FiveSame.modulate == Color(0,1,0):
 		$FiveSame.disabled = true
 		$FiveSame.modulate = Color(0.30,0.30,0.30)
-		$OneSound.play()
+		$FiveSameSound.play()
 		next_turn.emit(-1)
 	else:
 		$ErrorSound.play()

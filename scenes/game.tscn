@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b3cli8g7jlye6"]
+[gd_scene load_steps=36 format=3 uid="uid://b3cli8g7jlye6"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_3svv7"]
 [ext_resource type="Texture2D" uid="uid://yt3h73wjw0e0" path="res://assets/buttons/1.png" id="1_ehn74"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://dxysnf02s8kni" path="res://assets/buttons/restart.png" id="20_lusi5"]
 [ext_resource type="AudioStream" uid="uid://u0pbwcmiewjh" path="res://assets/sounds/chance.ogg" id="20_lwi0w"]
 [ext_resource type="Texture2D" uid="uid://dpq5acm025uto" path="res://assets/buttons/exit.png" id="21_coixj"]
+[ext_resource type="AudioStream" uid="uid://qrc5o5p4ebiq" path="res://assets/sounds/5same.ogg" id="22_8yspl"]
 [ext_resource type="AudioStream" uid="uid://cmlpmq5u3sesb" path="res://assets/sounds/pause.ogg" id="22_m82gr"]
 [ext_resource type="AudioStream" uid="uid://ckfduqdodj0nv" path="res://assets/sounds/unpause.ogg" id="23_5euy7"]
 [ext_resource type="FontFile" uid="uid://dhc1te1njn76y" path="res://assets/fonts/digitalix.ttf" id="25_qhkys"]
@@ -198,6 +199,9 @@ stream = ExtResource("19_mhtml")
 
 [node name="ChanceSound" type="AudioStreamPlayer" parent="ScoreButtons"]
 stream = ExtResource("20_lwi0w")
+
+[node name="FiveSameSound" type="AudioStreamPlayer" parent="ScoreButtons"]
+stream = ExtResource("22_8yspl")
 
 [node name="ErrorSound" type="AudioStreamPlayer" parent="ScoreButtons"]
 stream = ExtResource("18_ga1ha")

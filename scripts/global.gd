@@ -2,7 +2,6 @@ extends Node
 
 var high_score = 0
 var last_score = 0
-var player_name = "Saucisse"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,7 +10,6 @@ func _ready():
 func save():
 	var save_dict = {
 		"high_score" : high_score,
-		"name" : player_name,
 	}
 	return save_dict
 
